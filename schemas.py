@@ -1,5 +1,9 @@
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, validator, ConfigDict
 from typing import Optional
+
+
+class STaskGetByIdOne(BaseModel):
+    id: int
 
 
 class STaskADD(BaseModel):
@@ -16,7 +20,13 @@ class STaskADD(BaseModel):
 class STask(STaskADD):
     id: int
 
+    model_config = ConfigDict(from_attributes=True)
+
 
 class STaskId(BaseModel):
     ok: bool = True
+    task_id: int
+
+
+class STaskDel(BaseModel):
     task_id: int
