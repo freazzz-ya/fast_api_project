@@ -1,6 +1,7 @@
-from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
-from sqlalchemy.orm import DeclarativeBase, MappedColumn, Mapped
 from typing import Optional
+
+from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
+from sqlalchemy.orm import DeclarativeBase, Mapped, MappedColumn
 
 engine = create_async_engine(
     "sqlite+aiosqlite:///tasks.db"

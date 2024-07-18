@@ -1,8 +1,9 @@
-from sqlalchemy import select, delete
 from typing import Optional, Union
 
-from database import new_session, TaskOrm
-from schemas import STaskADD, STask, STaskGetByIdOne
+from sqlalchemy import delete, select
+
+from database import TaskOrm, new_session
+from schemas import STask, STaskADD, STaskGetByIdOne
 
 
 class TaskRepository:

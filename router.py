@@ -1,9 +1,9 @@
-from typing import Annotated, Union, Dict
-from fastapi import Depends
-from fastapi import APIRouter
+from typing import Annotated, Dict, Union
 
-from schemas import STaskADD, STask, STaskId, STaskGetByIdOne
+from fastapi import APIRouter, Depends
+
 from repository import TaskRepository
+from schemas import STask, STaskADD, STaskGetByIdOne, STaskId
 
 router = APIRouter(
     prefix='/tasks',
