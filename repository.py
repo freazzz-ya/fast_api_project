@@ -2,7 +2,7 @@ from sqlalchemy import select, delete
 from typing import Optional, Union
 
 from database import new_session, TaskOrm
-from schemas import STaskADD, STask, STaskDel, STaskGetByIdOne, STaskId
+from schemas import STaskADD, STask, STaskGetByIdOne
 
 
 class TaskRepository:
@@ -56,6 +56,21 @@ class TaskRepository:
                 query = delete(TaskOrm).where(TaskOrm.id == data.id)
                 await session.execute(query)
                 await session.commit()
-                return True  # Return True if deletion was successful
+                return task_model  # Return True if deletion was successful
             else:
                 return False  # Return False if the task doesn't exist
+
+    @classmethod
+    async def update_task(cls, data: STask) -> Union[STask, None]:
+        async with new_session() as session:
+            task = await session.get(TaskOrm, data.id)
+            if not task:
+                return False  # или raise exception
+            #  обновляем атрибуты таска
+            for key, value in data.model_dump().items():
+                if key != 'id':
+                    setattr(task, key, value)
+            #  сохраняем изменения
+            session.add(task)
+            await session.commit()
+            return STask.model_validate(task.__dict__)
