@@ -1,2 +1,2 @@
 # fast_api_project
-Realizations simple CRUD methods
+Realizations simple CRUD methods with pattern repozitory
